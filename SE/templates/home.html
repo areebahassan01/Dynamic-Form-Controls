@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dynamic Text Box Example</title>
+		<style>
+			.main_div {
+				position: relative;
+				height: 100vh;
+			}
+			
+			.sub_div {
+				position: absolute;
+				bottom: 0;
+			}
+			
+			.textbox_div {
+				display: flex;
+				align-items: center;
+			}
+			
+			.textbox {
+				margin-right: 10px;
+			}
+
+			.add-textbox {
+				background-color: red;
+                color: black;
+            }
+
+			
+			.remove_button {
+				background-color: red;
+				color: black;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main_div">
+			<a href="https://www.amazon.com/">Amazon</a><br>
+			<a href="https://www.youtube.com/">Youtube</a><br>
+			<a href="https://www.unt.edu/">Univeristy of North Texas</a><br>
+			<a href="/download">Download</a><br>
+			
+			<button onclick="increaseFontSize()">+ font size</button>
+			<button onclick="decreaseFontSize()">- font size</button>
+			
+			<div id="content">
+				<p>Hello World! How are you?</p>
+				<button class="add-textbox" onclick="addTextbox()">+</button> <br> <br>
+
+				
+				<div class="textbox_container">
+				</div>
+				
+				<div class="sub_div">
+					<a href="/logout"><button>Logout</button></a><br>
+					<label for="colorInput">Choose a background color:</label>
+					<input type="color" id="colorInput" onchange="changeBackgroundColor()">
+				</div>
+				
+				
+			</div>
+		</div>
+		
+		<script>
+			function increaseFontSize() {
+				var element = document.getElementById("content");
+				var fontSize = window.getComputedStyle(element, null).getPropertyValue('font-size');
+				var currentSize = parseFloat(fontSize);
+				element.style.fontSize = (currentSize + 1) + 'px';
+			}
+
+			function decreaseFontSize() {
+				var element = document.getElementById("content");
+				var fontSize = window.getComputedStyle(element, null).getPropertyValue('font-size');
+				var currentSize = parseFloat(fontSize);
+				element.style.fontSize = (currentSize - 1) + 'px';
+			}
+
+			function changeBackgroundColor() {
+				var color = document.getElementById("colorInput").value;
+				document.body.style.backgroundColor = color;
+			}
+			
+			var textBoxCount = 0;
+    
+			function addTextbox() {
+				var textboxContainer = document.querySelector('.textbox_container');
+				
+				var newTextboxDiv = document.createElement("div");
+				newTextboxDiv.classList.add('textbox_div');
+
+				var newTextbox = document.createElement("input");
+				newTextbox.type = "text";
+				newTextbox.id = "textbox_" + (++textBoxCount);
+				newTextbox.classList.add('textbox');
+
+				var newButton = document.createElement("button");
+				newButton.innerHTML = "-";
+				newButton.classList.add('remove_button');
+				newButton.onclick = function() { removeTextbox(newTextboxDiv); };
+
+				newTextboxDiv.appendChild(newTextbox);
+				newTextboxDiv.appendChild(newButton);
+
+				textboxContainer.appendChild(newTextboxDiv);
+			}
+			
+			function removeTextbox(textboxDiv) {
+				textboxDiv.remove();
+			}
+		</script>
+	</body>
+</html>
