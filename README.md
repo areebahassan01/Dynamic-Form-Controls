@@ -11,4 +11,4 @@ Click the "+ font size" button to increase the font size of the content.
 Click the "- font size" button to decrease the font size of the content.
 Click the color picker to choose a new background color and hit enter.
 # Built With
-This code was built with HTML and JavaScript.
+This code was built with Python, HTML and JavaScript.
